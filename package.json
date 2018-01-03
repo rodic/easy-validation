@@ -1,0 +1,34 @@
+{
+  "author": "rodic",
+  "description": "Javascript validation library",
+  "license": "MIT",
+  "main": "dist/src/index.js",
+  "name": "easy-validation",
+  "types": "dist/src/index.d.ts",
+  "version": "1.0.0",
+  "scripts": {
+    "clean": "rm -r dist/*",
+    "compile": "tsc",
+    "compile-watch": "tsc -w",
+    "lint": "tslint --project ./tsconfig.json ./{src,test}/**/*.ts",
+    "pretest": "npm run compile",
+    "test": "NODE_ENV=test mocha --opts test/mocha.opts dist/test",
+    "prepublish": "npm run compile && npm run lint"
+  },
+  "dependencies": {
+    "@types/bluebird": "^3.5.19",
+    "@types/validator": "^6.3.0",
+    "bluebird": "^3.5.1",
+    "typescript": "^2.6.2",
+    "validator": "^9.2.0"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.0.10",
+    "@types/chai-as-promised": "^7.1.0",
+    "@types/mocha": "^2.2.45",
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "mocha": "^4.1.0",
+    "tslint": "^5.8.0"
+  }
+}
