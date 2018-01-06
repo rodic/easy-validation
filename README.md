@@ -1,6 +1,6 @@
 # Easy Validation
 
-A TypeScript library for string validation. The lib use a subset of [validator.js](https://github.com/chriso/validator.js) validators, but it can use any function that validates string or string array and returns boolean or boolean promise.
+A TypeScript validation library. The lib use a subset of [validator.js](https://github.com/chriso/validator.js) validators, but it can use any function that validates string or string array and returns boolean or boolean promise.
 
 Example in plain JS.
 
@@ -71,4 +71,4 @@ validate(validUser, validations)
 //   phone: '123456789' }
 ```
 
-[Bigger example](test/validate.test.ts) can be found in tests
+For expanded example please check [tests](test/validate.test.ts)
