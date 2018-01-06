@@ -46,11 +46,11 @@ export const equals: ValidatorWithOption<equalsValidator.EqualsOption>
 export const hasLengthOf: ValidatorWithOption<lengthValidator.LengthOption>
   = lengthValidator.hasLengthOf;
 
+export const hasLengthsOf: ValidatorWithOption<lengthValidator.LengthOption>
+  = lengthValidator.hasLengthsOf;
+
 export const hasNotBlanks: ValidatorWithOption<undefined>
   = blankValidator.hasNotBlanks;
-
-export const haveLengthsOf: ValidatorWithOption<lengthValidator.LengthOption>
-  = lengthValidator.haveLengthsOf;
 
 export const isAfterDate: ValidatorWithOption<dateValidator.DateOption>
   = dateValidator.isAfterDate;

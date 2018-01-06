@@ -9,7 +9,7 @@ export interface LengthOption {
 export const hasLengthOf: ValidatorWithOption<LengthOption>
   = option => val => unlessNull(val, value => isLength(value, option));
 
-export const haveLengthsOf: ValidatorWithOption<LengthOption>
+export const hasLengthsOf: ValidatorWithOption<LengthOption>
   = option => vals => unlessNull(
     vals,
     values => values.every(val => hasLengthOf(option)(val))

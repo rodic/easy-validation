@@ -182,20 +182,44 @@ Fails if property does not contain given string.
 ### equals
 
 ```ts
-equals(param)
+equals(str)
 ```
 
-Fails if property is not equal to the given param.
+Fails if property is not equal to the given str.
 
 ### hasLengthOf
 
 ```ts
-hasLengthOf({ min: m, max: n})
+interface LengthOption {
+  min?: number;
+  max?: number;
+}
+
+hasLengthOf(option)
 ```
 
 Fails if property does not have length between min and max.
 
 Valid options are `{ min: m }` and `{ max: m }` as well.
+
+If both values are omitted string is considered valid.
+
+### hasLengthsOf
+
+```ts
+interface LengthOption {
+  min?: number;
+  max?: number;
+}
+
+hasLengthsOf(option)
+```
+
+Fails if any value in the list does not match length criteria.
+
+Valid options are `{ min: m }` and `{ max: m }` as well.
+
+If both values are omitted all strings in the list are considered valid.
 
 ### hasNotBlanks
 
@@ -204,15 +228,6 @@ hasNotBlanks()
 ```
 
 Fails if list contains empty string.
-
-### haveLengthsOf
-
-```ts
-haveLengthsOf({ min: m, max: n })
-```
-
-Fails if any value in the list does not match length criteria.
-
 
 ### isAfterDate
 

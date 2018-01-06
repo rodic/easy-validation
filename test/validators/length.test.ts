@@ -3,7 +3,7 @@ import { expect } from "../helpers";
 import * as L from "../../src/validators/length";
 
 describe("Validators.Length", function() {
-  describe("hasLength", function() {
+  describe("hasLengthOf", function() {
     context("when value is missing", function() {
       it("returns true", function() {
         expect(
@@ -59,11 +59,11 @@ describe("Validators.Length", function() {
     });
   });
 
-  describe("haveLengths", function() {
+  describe("hasLengthsOf", function() {
     context("when value is missing", function() {
       it("returns true", function() {
         expect(
-          L.haveLengthsOf({})(undefined)
+          L.hasLengthsOf({})(undefined)
         ).to.be.eql(true);
       });
     });
@@ -72,7 +72,7 @@ describe("Validators.Length", function() {
       context("and options are missing", function() {
         it("returns true", function() {
           expect(
-            L.haveLengthsOf({})(["1"])
+            L.hasLengthsOf({})(["1"])
           ).to.be.eql(true);
         });
       });
@@ -81,7 +81,7 @@ describe("Validators.Length", function() {
         context("and string does not match criteria", function() {
           it("returns false", function() {
             expect(
-              L.haveLengthsOf({ min: 2 })(["1", "12"])
+              L.hasLengthsOf({ min: 2 })(["1", "12"])
             ).to.be.eql(false);
           });
         });
@@ -89,7 +89,7 @@ describe("Validators.Length", function() {
         context("and string matches criteria", function() {
           it("returns true", function() {
             expect(
-              L.haveLengthsOf({ min: 2 })(["12", "123"])
+              L.hasLengthsOf({ min: 2 })(["12", "123"])
             ).to.be.eql(true);
           });
         });
@@ -99,7 +99,7 @@ describe("Validators.Length", function() {
         context("and string does not match criteria", function() {
           it("returns false", function() {
             expect(
-              L.haveLengthsOf({ max: 2 })(["", "1", "12", "123"])
+              L.hasLengthsOf({ max: 2 })(["", "1", "12", "123"])
             ).to.be.eql(false);
           });
         });
@@ -107,7 +107,7 @@ describe("Validators.Length", function() {
         context("and string matches criteria", function() {
           it("returns true", function() {
             expect(
-              L.haveLengthsOf({ max: 2 })(["", "1", "12"])
+              L.hasLengthsOf({ max: 2 })(["", "1", "12"])
             ).to.be.eql(true);
           });
         });
