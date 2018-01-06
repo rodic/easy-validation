@@ -53,16 +53,16 @@ export const haveLengthsOf: ValidatorWithOption<lengthValidator.LengthOption>
   = lengthValidator.haveLengthsOf;
 
 export const isAfterDate: ValidatorWithOption<dateValidator.DateOption>
-  = dateValidator.isAfterDate
+  = dateValidator.isAfterDate;
 
 export const isAfterNow: ValidatorWithOption<undefined>
-  = dateValidator.isAfterNow
+  = dateValidator.isAfterNow;
 
 export const isBeforeDate: ValidatorWithOption<dateValidator.DateOption>
-  = dateValidator.isBeforeDate
+  = dateValidator.isBeforeDate;
 
 export const isBeforeNow: ValidatorWithOption<undefined>
-  = dateValidator.isBeforeNow
+  = dateValidator.isBeforeNow;
 
 export const isDate: ValidatorWithOption<undefined>
   = dateValidator.isDate;
