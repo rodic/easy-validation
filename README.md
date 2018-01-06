@@ -148,3 +148,161 @@ validate(validUser, validations)
 ```
 
 For expanded example please check [tests](test/validate.test.ts)
+
+## Validators
+
+All validators except `isNotNull` treat properties as optional. that is they validate `null` and `undefined`.
+
+### areEmails
+
+```ts
+areEmails()
+```
+
+Fails if list contains anything but valid emails.
+
+### areNumerics
+
+```ts
+areNumerics()
+```
+
+Fails if list contains anything but numeric values.
+
+### contains
+
+```ts
+contains(str)
+```
+
+Fails if property does not contain given string.
+
+### equals
+
+```ts
+equals(param)
+```
+
+Fails if property is not equal to the given param.
+
+### hasLengthOf
+
+```ts
+hasLengthOf({ min: m, max: n})
+```
+
+Fails if property does not have length between min and max.
+
+Valid options are `{ min: m }` and `{ max: m }` as well.
+
+### hasNotBlanks
+
+```ts
+hasNotBlanks()
+```
+
+Fails if list contains empty string.
+
+### haveLengthsOf
+
+```ts
+haveLengthsOf({ min: m, max: n })
+```
+
+Fails if any value in the list does not match length criteria.
+
+
+### isAfterDate
+
+```ts
+isAfterDate(datetime)
+```
+
+Fails if property is not valid date or not after date param.
+
+If date param is not valid date or datetime string validation fails with `ValidatorError`.
+
+
+### isAfterNow
+
+```ts
+isAfterNow()
+```
+
+Fails if property is not valid date or not after current datetime.
+
+### isBeforeDate
+
+```ts
+isBeforeDate(date)
+```
+
+Fails if property is not valid date or not before date param.
+
+If date param is not valid date or datetime string validation fails with `ValidatorError`.
+
+
+### isBeforeNow
+
+```ts
+isBeforeNow()
+```
+
+Fails if property is not valid date or not before current datetime.
+
+### isDate
+
+```ts
+isDate()
+```
+
+Fails if property is not [parsable](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse) date string.
+
+
+### isDateOnly
+
+```ts
+isDateOnly()
+```
+Fails if property is not [parasble](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse) date or if it contains any component but `mm` `dd` and `yyyy`.
+
+### isEmail
+
+```ts
+isEmail()
+```
+
+Fails if property is not valid email.
+
+### isNotBlank
+
+```ts
+isNotBlank()
+```
+
+Fails if property is empty string.
+
+
+### isNotNull
+
+```ts
+isNotNull()
+```
+
+Fails if property is `null` or `undefined`.
+
+### isNotNumeric
+
+```ts
+isNotNumeric()
+```
+
+Fails if property is numeric.
+
+### isNumeric
+
+```ts
+isNumeric()
+```
+
+Fails if property is not numeric.
