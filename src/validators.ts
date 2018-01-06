@@ -1,6 +1,8 @@
 import * as Promise from "bluebird";
 
 import * as blankValidator from "./validators/blank";
+import * as containsValidator from "./validators/contains";
+import * as equalsValidator from "./validators/equals";
 import * as emailValidator from "./validators/email";
 import * as lengthValidator from "./validators/length";
 import * as nullValidator from "./validators/null";
@@ -31,6 +33,12 @@ export const areEmails: ValidatorWithOption<undefined>
 
 export const areNumerics: ValidatorWithOption<undefined>
   = numericValidator.areNumerics;
+
+export const contains: ValidatorWithOption<containsValidator.ContainsOption>
+  = containsValidator.contains;
+
+export const equals: ValidatorWithOption<equalsValidator.EqualsOption>
+  = equalsValidator.equals;
 
 export const hasLengthOf: ValidatorWithOption<lengthValidator.LengthOption>
   = lengthValidator.hasLengthOf;
