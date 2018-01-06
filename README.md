@@ -24,11 +24,11 @@ const validUser: ValidationObject = {
   username: "uname",
   email: "user@example.com",
   phone: "123456789"
-}
+};
 
-const isUnique: Validator = username => {
-  return Promise.resolve(username !== "u@example.com");
-}
+const isUnique: Validator = email => {
+  return Promise.resolve(email !== "u@example.com");
+};
 
 const validations: Validations = {
   username: [{
@@ -94,10 +94,10 @@ var validUser = {
   username: "uname",
   email: "user@example.com",
   phone: "123456789"
-}
+};
 
-function isUnique(username) {
-  return Promise.resolve(username !== "u@example.com");
+function isUnique(email) {
+  return Promise.resolve(email !== "u@example.com");
 }
 
 var validations = {

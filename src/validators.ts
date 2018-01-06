@@ -2,6 +2,7 @@ import * as Promise from "bluebird";
 
 import * as blankValidator from "./validators/blank";
 import * as containsValidator from "./validators/contains";
+import * as dateValidator from "./validators/date";
 import * as equalsValidator from "./validators/equals";
 import * as emailValidator from "./validators/email";
 import * as lengthValidator from "./validators/length";
@@ -21,8 +22,10 @@ export interface UnlessNull {
   (value: string[], fn: Validator): boolean | Promise<boolean>;
 }
 
+export const isNull = val => val === null || val === undefined;
+
 export const unlessNull: UnlessNull = (val, fn) => {
-  if (val === null || val === undefined) {
+  if (isNull(val)) {
     return true;
   }
   return fn(val);
@@ -48,6 +51,24 @@ export const hasNotBlanks: ValidatorWithOption<undefined>
 
 export const haveLengthsOf: ValidatorWithOption<lengthValidator.LengthOption>
   = lengthValidator.haveLengthsOf;
+
+export const isAfterDate: ValidatorWithOption<dateValidator.DateOption>
+  = dateValidator.isAfterDate
+
+export const isAfterNow: ValidatorWithOption<undefined>
+  = dateValidator.isAfterNow
+
+export const isBeforeDate: ValidatorWithOption<dateValidator.DateOption>
+  = dateValidator.isBeforeDate
+
+export const isBeforeNow: ValidatorWithOption<undefined>
+  = dateValidator.isBeforeNow
+
+export const isDate: ValidatorWithOption<undefined>
+  = dateValidator.isDate;
+
+export const isDateOnly: ValidatorWithOption<undefined>
+  = dateValidator.isDateOnly;
 
 export const isEmail: ValidatorWithOption<undefined>
   = emailValidator.isEmail;

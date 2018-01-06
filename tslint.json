@@ -10,7 +10,7 @@
     "class-name": true,
     "comment-format": [true, "check-space"],
     "curly": true,
-    "cyclomatic-complexity": [true, 4],
+    "cyclomatic-complexity": [true, 5],
     "eofline": true,
     "import-spacing": true,
     "indent": [true, "spaces", 2],
