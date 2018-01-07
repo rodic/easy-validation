@@ -1,4 +1,4 @@
-import { ValidatorWithOption } from "../validators";
+import { ValidatorWithOption, isNull } from "../validators";
 
 export const isNotNull: ValidatorWithOption<undefined>
-  = _option => val => val !== null && val !== undefined;
+  = _option => val => !isNull(val);

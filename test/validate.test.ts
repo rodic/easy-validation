@@ -41,7 +41,7 @@ const validUser: ValidationObject = {
 };
 
 const invalidUser: ValidationObject = {
-  id: "1",
+  id: "0", // not positive int
   username: "mess", // username taken,
   personalData: {
     name: {
@@ -83,6 +83,9 @@ const idValidation = [{
 }, {
   validate: V.isNumeric(),
   message: "id must be a number"
+}, {
+  validate: V.isMin(1),
+  message: "id must be a positive integer"
 }];
 
 const usernameValidation = [{
@@ -171,9 +174,9 @@ const userValidations: Validations = {
 
 const result: ValidationResult = {
   id: {
-    "errorMessage": "",
-    "errorMessages": [],
-    "hasError": false
+    "errorMessage": "id must be a positive integer",
+    "errorMessages": ["id must be a positive integer"],
+    "hasError": true
   },
   username: {
     errorMessage: "username has been taken",

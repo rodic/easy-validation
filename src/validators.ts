@@ -3,10 +3,12 @@ import * as Promise from "bluebird";
 import * as blankValidator from "./validators/blank";
 import * as containsValidator from "./validators/contains";
 import * as dateValidator from "./validators/date";
-import * as equalsValidator from "./validators/equals";
 import * as emailValidator from "./validators/email";
+import * as equalsValidator from "./validators/equals";
+import * as inValidator from "./validators/in";
 import * as lengthValidator from "./validators/length";
 import * as nullValidator from "./validators/null";
+import * as numbersValidator from "./validators/numbers";
 import * as numericValidator from "./validators/numeric";
 
 export type ValidatorWithOption<T>
@@ -72,6 +74,21 @@ export const isDateOnly: ValidatorWithOption<undefined>
 
 export const isEmail: ValidatorWithOption<undefined>
   = emailValidator.isEmail;
+
+export const isFloat: ValidatorWithOption<undefined>
+  = numbersValidator.isFloat;
+
+export const isIn: ValidatorWithOption<inValidator.InOption>
+  = inValidator.isIn;
+
+export const isInt: ValidatorWithOption<undefined>
+  = numbersValidator.isInt;
+
+export const isMax: ValidatorWithOption<numbersValidator.MinMaxOption>
+  = numbersValidator.isMax;
+
+export const isMin: ValidatorWithOption<numbersValidator.MinMaxOption>
+  = numbersValidator.isMin;
 
 export const isNotBlank: ValidatorWithOption<undefined>
   = blankValidator.isNotBlank;
