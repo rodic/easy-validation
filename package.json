@@ -1,11 +1,24 @@
 {
+  "name": "easy-validation",
+  "description": "TypeScript validation library",
+  "version": "1.0.1",
+  "homepage": "https://github.com/rodic/easy-validation",
+  "keywords": [
+    "validator",
+    "validation",
+    "validate",
+    "validate object",
+    "validate properties"
+  ],
   "author": "rodic",
-  "description": "Javascript validation library",
-  "license": "MIT",
+  "email": "alek.rodic@gmail.com",
   "main": "dist/src/index.js",
   "name": "easy-validation",
   "types": "dist/src/index.d.ts",
-  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rodic/easy-validation"
+  },
   "scripts": {
     "clean": "rm -r dist/*",
     "compile": "tsc",
@@ -30,5 +43,6 @@
     "chai-as-promised": "^7.1.1",
     "mocha": "^4.1.0",
     "tslint": "^5.8.0"
-  }
+  },
+  "license": "MIT"
 }

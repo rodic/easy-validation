@@ -1,4 +1,5 @@
+.travis.yml
+dist/test/
+src/
 tsconfig.json
-src
-test
-dist/test
+tsling.json

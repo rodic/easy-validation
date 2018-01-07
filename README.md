@@ -90,7 +90,7 @@ Expanded example that includes nested properties and array of objects can be fou
 
 ## Validators
 
-All validators except `isNotNull` treat properties as optional. that is they validate `null` and `undefined`.
+All validators except `isNotNull` treat properties as optional. That is they validate `null` and `undefined`.
 
 ### areEmails
 
