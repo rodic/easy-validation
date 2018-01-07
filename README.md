@@ -4,6 +4,12 @@
 
 A TypeScript validation library. The lib use a subset of [validator.js](https://github.com/chriso/validator.js) validators, but it can use any function that validates string or string array and returns boolean or boolean promise.
 
+## Installation
+
+```
+npm install easy-validation
+```
+
 ## Usage
 
 ```ts
@@ -80,7 +86,7 @@ validate(validUser, validations)
 
 ```
 
-Expanded example that includes nested properties and array of objects can be found at [tests](test/validate.test.ts)
+Expanded example that includes nested properties and array of objects can be found in [tests](test/validate.test.ts)
 
 ## Validators
 
