@@ -1,6 +1,6 @@
 # Easy Validation
 
-[![Build Status](https://travis-ci.org/rodic/easy-validation.svg?branch=master)](https://travis-ci.org/rodic/easy-validation)
+[![Build Status](https://travis-ci.org/rodic/easy-validation.svg?branch=master)](https://travis-ci.org/rodic/easy-validation) [![Known Vulnerabilities](https://snyk.io/test/github/rodic/easy-validation/badge.svg?targetFile=package.json)](https://snyk.io/test/github/rodic/easy-validation?targetFile=package.json)
 
 A TypeScript validation library. The lib use a subset of [validator.js](https://github.com/chriso/validator.js) validators, but it can use any function that validates string or string array and returns boolean or boolean promise.
 
