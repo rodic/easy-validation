@@ -1,5 +1,6 @@
 .travis.yml
 dist/test/
 src/
+test/
 tsconfig.json
-tsling.json
+tslint.json
