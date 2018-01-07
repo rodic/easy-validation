@@ -172,11 +172,78 @@ const userValidations: Validations = {
   }]]
 };
 
-const result: ValidationResult = {
+const noUserResult: ValidationResult = {
   id: {
-    "errorMessage": "id must be a positive integer",
-    "errorMessages": ["id must be a positive integer"],
-    "hasError": true
+    errorMessage: "id cannot be null",
+    errorMessages: ["id cannot be null"],
+    hasError: true
+  },
+  username: {
+    errorMessage: "username cannot be null",
+    errorMessages: ["username cannot be null"],
+    hasError: true
+  },
+  personalData: {
+    name: {
+      first: {
+        errorMessage: "first name cannot be null",
+        errorMessages: ["first name cannot be null"],
+        hasError: true
+      },
+      last: {
+        errorMessage: "last name cannot be null",
+        errorMessages: ["last name cannot be null"],
+        hasError: true
+      }
+    },
+    address: {
+      street: {
+        name: {
+          errorMessage: "",
+          errorMessages: [],
+          hasError: false
+        },
+        number: {
+          errorMessage: "",
+          errorMessages: [],
+          hasError: false
+        }
+      },
+      city: {
+        errorMessage: "city cannot be null",
+        errorMessages: ["city cannot be null"],
+        hasError: true
+      },
+      zipCode: {
+        errorMessage: "",
+        errorMessages: [],
+        hasError: false
+      },
+      apartmentNumber: {
+        errorMessage: "",
+        errorMessages: [],
+        hasError: false
+      }
+    },
+    phone: {
+      errorMessage: "",
+      errorMessages: [],
+      hasError: false
+    },
+    email: {
+      errorMessage: "",
+      errorMessages: [],
+      hasError: false
+    }
+  },
+  friends: []
+};
+
+const invalidUserResult: ValidationResult = {
+  id: {
+    errorMessage: "id must be a positive integer",
+    errorMessages: ["id must be a positive integer"],
+    hasError: true
   },
   username: {
     errorMessage: "username has been taken",
@@ -302,20 +369,34 @@ describe("Validate", function() {
   });
 
   context("when there are validations", function() {
-    context("and the input object satisfies them", function() {
-      it("returns the object", function() {
+    context("and there is no validation object", function() {
+      it("returns all not null errors", function() {
         return expect(
-          validate(validUser, userValidations)
-        ).to.become(validUser);
+          validate({}, userValidations)
+        ).to.be.rejectedWith(ValidationError).then(error => {
+          return expect(error)
+            .to.have.property("errors").be.eql(noUserResult);
+        });
       });
     });
 
-    context("and the input object does not satisfy them", function() {
-      it("returns correct errors", function() {
-        return expect(
-          validate(invalidUser, userValidations)
-        ).to.be.rejectedWith(ValidationError).then(error => {
-          return expect(error).to.have.property("errors").be.eql(result);
+    context("and there is validation object", function() {
+      context("and the input object satisfies them", function() {
+        it("returns the input", function() {
+          return expect(
+            validate(validUser, userValidations)
+          ).to.become(validUser);
+        });
+      });
+
+      context("and the input object does not satisfy them", function() {
+        it("returns correct errors", function() {
+          return expect(
+            validate(invalidUser, userValidations)
+          ).to.be.rejectedWith(ValidationError).then(error => {
+            return expect(error)
+              .to.have.property("errors").be.eql(invalidUserResult);
+          });
         });
       });
     });

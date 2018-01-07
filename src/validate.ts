@@ -62,7 +62,7 @@ function validate(
       const valOption: ValidationOption = validations[property];
 
       if (areArrayValidations(valOption)) {
-        const values = obj[property] as ValidationObject[];
+        const values = (obj[property] || []) as ValidationObject[];
         const arrayVals = valOption[0][0];
 
         return mapValidation(property, values, arrayVals, validationResult);
@@ -76,7 +76,7 @@ function validate(
         });
       }
 
-      const nestedObject = obj[property] as ValidationObject;
+      const nestedObject = (obj[property] || {}) as ValidationObject;
 
       return validate(nestedObject, valOption)
         .then(nestedValidationResult => {
