@@ -1,7 +1,7 @@
 {
   "name": "easy-validation",
   "description": "TypeScript validation library",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "homepage": "https://github.com/rodic/easy-validation",
   "keywords": [
     "validator",

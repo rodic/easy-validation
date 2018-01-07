@@ -6,7 +6,7 @@ import {
   hasErrors,
   ValidationResult
 } from "./validation-result";
-import { ValidationError } from "./errors";
+import { ValidationError, ValidatorError } from "./errors";
 import { Validator } from "./validators";
 
 export interface Validations {
@@ -127,12 +127,16 @@ function validateValue(
   return Promise.reduce(
     validations,
     (errors: string[], validation: PropertyValidation) => {
-      return Promise.resolve(validation.validate(value))
-        .then(valid => {
-          if (valid) {
+      return Promise.attempt(() => validation.validate(value))
+        .then(isValid => {
+          if (isValid) {
             return errors;
           }
           return [...errors, validation.message];
+        })
+        .catch(_error => {
+          const message = `Error validating property with value: ${value}.`;
+          return Promise.reject(new ValidatorError(message));
         });
     },
     []

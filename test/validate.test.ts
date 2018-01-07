@@ -4,7 +4,7 @@ import { expect } from "./helpers";
 
 import * as V from "../src/validators";
 import validate, { Validations, ValidationObject } from "../src/validate";
-import { ValidationError } from "../src/errors";
+import { ValidationError, ValidatorError } from "../src/errors";
 import { ValidationResult } from "../src/validation-result";
 
 const validUser: ValidationObject = {
@@ -381,23 +381,66 @@ describe("Validate", function() {
     });
 
     context("and there is validation object", function() {
-      context("and the input object satisfies them", function() {
-        it("returns the input", function() {
-          return expect(
-            validate(validUser, userValidations)
-          ).to.become(validUser);
+      context("and validations do not follow property types", function() {
+        const validationObject: ValidationObject = {
+          email: "u@example.com"
+        };
+
+        context("and validation is sync", function() {
+          it("returns correct error", function() {
+            const validations: Validations = {
+              email: [{
+                validate: V.areEmails(),
+                message: "not email"
+              }]
+            };
+            return expect(
+              validate(validationObject, validations)
+            ).to.be.rejectedWith(
+              ValidatorError,
+              "Error validating property with value: u@example.com."
+              );
+          });
+        });
+
+        context("and validation is async", function() {
+          it("returns correct error", function() {
+            const validations: Validations = {
+              email: [{
+                validate: vals => Promise.resolve(V.areEmails()(vals)),
+                message: "not email"
+              }]
+            };
+            return expect(
+              validate(validationObject, validations)
+            ).to.be.rejectedWith(
+              ValidatorError,
+              "Error validating property with value: u@example.com."
+              );
+          });
         });
       });
 
-      context("and the input object does not satisfy them", function() {
-        it("returns correct errors", function() {
-          return expect(
-            validate(invalidUser, userValidations)
-          ).to.be.rejectedWith(ValidationError).then(error => {
-            return expect(error)
-              .to.have.property("errors").be.eql(invalidUserResult);
+      context("and validations follow property types", function() {
+        context("and the input object satisfies them", function() {
+          it("returns the input", function() {
+            return expect(
+              validate(validUser, userValidations)
+            ).to.become(validUser);
           });
         });
+
+        context("and the input object does not satisfy them", function() {
+          it("returns correct errors", function() {
+            return expect(
+              validate(invalidUser, userValidations)
+            ).to.be.rejectedWith(ValidationError).then(error => {
+              return expect(error)
+                .to.have.property("errors").be.eql(invalidUserResult);
+            });
+          });
+        });
+
       });
     });
   });
