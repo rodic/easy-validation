@@ -10,10 +10,10 @@ import { ValidationError } from "./errors";
 import { Validator } from "./validators";
 
 export interface Validations {
-  [key: string]: ValidatorOption;
+  [key: string]: ValidationOption;
 }
 
-export type ValidatorOption
+export type ValidationOption
   = PropertyValidations
   | ArrayValidations
   | Validations;
@@ -38,9 +38,9 @@ export type ValidationValue
 
 export default function(
   obj: ValidationObject,
-  rules: Validations
+  validations: Validations
 ): Promise<ValidationObject> {
-  return validate(obj, rules).then(validationObject => {
+  return validate(obj, validations).then(validationObject => {
     return new Promise((resolve, reject) => {
       if (hasErrors(validationObject)) {
         return reject(
@@ -54,30 +54,31 @@ export default function(
 
 function validate(
   obj: ValidationObject,
-  validators: Validations
+  validations: Validations
 ): Promise<ValidationResult> {
   return Promise.reduce<string, ValidationResult>(
-    Object.keys(validators),
+    Object.keys(validations),
     (validationResult, property) => {
-      if (areArrayValidations(validators[property])) {
+      const valOption: ValidationOption = validations[property];
+
+      if (areArrayValidations(valOption)) {
         const values = obj[property] as ValidationObject[];
-        const arrayRule = validators[property][0][0] as Validations;
+        const arrayVals = valOption[0][0];
 
-        return mapValidation(property, values, arrayRule, validationResult);
+        return mapValidation(property, values, arrayVals, validationResult);
       }
-      if (arePropertyValidations(validators[property])) {
-        const value = obj[property] as string;
-        const validations = validators[property] as PropertyValidation[];
 
-        return validateValue(value, validations).then(errors => {
+      if (arePropertyValidations(valOption)) {
+        const value = obj[property] as string;
+
+        return validateValue(value, valOption).then(errors => {
           return addErrors(property, errors, validationResult);
         });
       }
 
       const nestedObject = obj[property] as ValidationObject;
-      const nestedRules = validators[property] as Validations;
 
-      return validate(nestedObject, nestedRules)
+      return validate(nestedObject, valOption)
         .then(nestedValidationResult => {
           return addProperty(
             validationResult,
@@ -91,31 +92,31 @@ function validate(
 }
 
 function areArrayValidations(
-  rules: ValidatorOption
-): boolean {
-  return rules instanceof Array && rules[0] instanceof Array;
+  valOption: ValidationOption
+): valOption is ArrayValidations {
+  return valOption instanceof Array && valOption[0] instanceof Array;
 }
 
 function arePropertyValidations(
-  rules: ValidatorOption
-): boolean {
-  return rules instanceof Array;
+  valOption: ValidationOption
+): valOption is PropertyValidations {
+  return valOption instanceof Array;
 }
 
 function mapValidation(
   property: string,
   values: ValidationObject[],
-  rules: Validations,
-  validationObject: ValidationResult
+  validations: Validations,
+  validationResult: ValidationResult
 ): Promise<ValidationResult> {
   return Promise.reduce<ValidationObject, ValidationResult[]>(
     values,
     (accum, value) => {
-      return validate(value, rules).then(result => [...accum, result]);
+      return validate(value, validations).then(result => [...accum, result]);
     },
     []
-  ).then(newValidationObject => {
-    return addProperty(validationObject, property, newValidationObject);
+  ).then(validationResults => {
+    return addProperty(validationResult, property, validationResults);
   });
 }
 

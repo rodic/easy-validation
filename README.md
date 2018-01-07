@@ -86,7 +86,7 @@ validate(validUser, validations)
 
 ```
 
-Expanded example that includes nested properties and array of objects can be found in [tests](test/validate.test.ts)
+The extended example that includes nested properties and array of objects can be found in [tests](test/validate.test.ts)
 
 ## Validators
 
