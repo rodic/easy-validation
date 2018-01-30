@@ -58,7 +58,7 @@ function getValidationEntry(
 ): Promise<ValidationEntry> {
   return new Promise<ValidationEntry>((resolve, reject) => {
     if (validationValue && isValidationEntry(validationValue)) {
-      return resolve(<ValidationEntry>validationValue);
+      return resolve(validationValue);
     }
     if (!validationValue) {
       return resolve(nullEntry);
@@ -74,20 +74,24 @@ function getValidationEntry(
 export function hasErrors(errorObj: ValidationResult): boolean {
   return Object.keys(errorObj).some(prop => {
     const err = errorObj[prop];
-    if (areErrorValues(err)) {
-      return (<ValidationResult[]>err).some(hasErrors);
+    if (areValidationResults(err)) {
+      return err.some(hasErrors);
     }
     if (isValidationEntry(err)) {
-      return (<ValidationEntry>err).hasError;
+      return err.hasError;
     }
-    return hasErrors(<ValidationResult>err);
+    return hasErrors(err);
   });
 }
 
-function areErrorValues(validationValue: ValidationValue): boolean {
+function areValidationResults(
+  validationValue: ValidationValue
+): validationValue is ValidationResult[] {
   return validationValue instanceof Array;
 }
 
-function isValidationEntry(validationValue: ValidationValue): boolean {
+function isValidationEntry(
+  validationValue: ValidationValue
+): validationValue is ValidationEntry {
   return "hasError" in validationValue && "errorMessages" in validationValue;
 }

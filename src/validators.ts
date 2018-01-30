@@ -14,14 +14,16 @@ import * as numericValidator from "./validators/numeric";
 export type ValidatorWithOption<T>
   = (option?: T) => Validator;
 
+export type PBool = boolean | Promise<boolean>;
+
 export interface Validator {
-  (value: string): boolean | Promise<boolean>;
-  (value: string[]): boolean | Promise<boolean>;
+  (value: string): PBool;
+  (value: string[]): PBool;
 }
 
 export interface UnlessNull {
-  (value: string, fn: Validator): boolean | Promise<boolean>;
-  (value: string[], fn: Validator): boolean | Promise<boolean>;
+  (value: string, fn: Validator): PBool;
+  (value: string[], fn: Validator): PBool;
 }
 
 export const isNull = val => val === null || val === undefined;
