@@ -9,17 +9,14 @@ import { ValidatorError } from "../src/errors";
 
 const errorObject: ValidationResult = {
   a: {
-    errorMessage: "error 1",
     errorMessages: ["error 1"],
     hasError: true
   },
   b: {
-    errorMessage: "error 1",
     errorMessages: ["error 1"],
     hasError: true
   },
   c: {
-    errorMessage: "",
     errorMessages: [],
     hasError: false
   }
@@ -34,7 +31,6 @@ describe("ValidationResult", function() {
             addErrors("a", ["error 1"], {})
           ).to.become({
             a: {
-              errorMessage: "error 1",
               errorMessages: ["error 1"],
               hasError: true
             }
@@ -49,7 +45,6 @@ describe("ValidationResult", function() {
               addErrors("a", ["error 2"], {
                 a: {
                   b: {
-                    errorMessage: "",
                     errorMessages: [],
                     hasError: false
                   }
@@ -68,7 +63,6 @@ describe("ValidationResult", function() {
             ).to.become({
               ...errorObject,
               a: {
-                errorMessage: "error 1. error 2",
                 errorMessages: ["error 1", "error 2"],
                 hasError: true
               }
@@ -85,7 +79,6 @@ describe("ValidationResult", function() {
             addErrors("a", [], {})
           ).to.become({
             a: {
-              errorMessage: "",
               errorMessages: [],
               hasError: false
             }
@@ -117,13 +110,11 @@ describe("ValidationResult", function() {
         return expect(
           hasErrors({
             a: {
-              errorMessage: "",
               errorMessages: [],
               hasError: false
             },
             b: {
               c: {
-                errorMessage: "",
                 errorMessages: [],
                 hasError: false
               }
@@ -138,13 +129,11 @@ describe("ValidationResult", function() {
         expect(
           hasErrors({
             a: {
-              errorMessage: "error",
               errorMessages: ["error"],
               hasError: true
             },
             b: {
               c: {
-                errorMessage: "",
                 errorMessages: [],
                 hasError: false
               }
@@ -159,13 +148,11 @@ describe("ValidationResult", function() {
         expect(
           hasErrors({
             a: {
-              errorMessage: "",
               errorMessages: [],
               hasError: false
             },
             b: {
               c: {
-                errorMessage: "error",
                 errorMessages: ["error"],
                 hasError: true
               }
@@ -180,7 +167,6 @@ describe("ValidationResult", function() {
         expect(
           hasErrors({
             a: {
-              errorMessage: "",
               errorMessages: [],
               hasError: false
             },
@@ -188,24 +174,20 @@ describe("ValidationResult", function() {
               c: [{
                 d0: {
                   e: {
-                    errorMessage: "",
                     errorMessages: [],
                     hasError: false
                   },
                   f: {
-                    errorMessage: "",
                     errorMessages: [],
                     hasError: false
                   }
                 },
                 d1: {
                   e: {
-                    errorMessage: "",
                     errorMessages: [],
                     hasError: false
                   },
                   f: {
-                    errorMessage: "error",
                     errorMessages: ["error"],
                     hasError: true
                   }

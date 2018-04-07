@@ -12,13 +12,11 @@ export type ValidationValue
   | ValidationResult[];
 
 export interface ValidationEntry {
-  errorMessage: string;
   errorMessages: string[];
   hasError: boolean;
 }
 
 const nullEntry: ValidationEntry = {
-  errorMessage: "",
   errorMessages: [],
   hasError: false
 };
@@ -34,7 +32,6 @@ export function addErrors(
     return {
       ...validationResult,
       [property]: {
-        errorMessage: updatedErrors.join(". "),
         errorMessages: updatedErrors,
         hasError
       }

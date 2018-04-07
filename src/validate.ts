@@ -40,11 +40,11 @@ export default function(
   obj: ValidationObject,
   validations: Validations
 ): Promise<ValidationObject> {
-  return validate(obj, validations).then(validationObject => {
+  return validate(obj, validations).then(validationResult => {
     return new Promise((resolve, reject) => {
-      if (hasErrors(validationObject)) {
+      if (hasErrors(validationResult)) {
         return reject(
-          new ValidationError("Validation failed", validationObject)
+          new ValidationError("Validation failed", validationResult)
         );
       }
       return resolve(obj);

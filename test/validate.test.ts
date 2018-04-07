@@ -174,24 +174,20 @@ const userValidations: Validations = {
 
 const noUserResult: ValidationResult = {
   id: {
-    errorMessage: "id cannot be null",
     errorMessages: ["id cannot be null"],
     hasError: true
   },
   username: {
-    errorMessage: "username cannot be null",
     errorMessages: ["username cannot be null"],
     hasError: true
   },
   personalData: {
     name: {
       first: {
-        errorMessage: "first name cannot be null",
         errorMessages: ["first name cannot be null"],
         hasError: true
       },
       last: {
-        errorMessage: "last name cannot be null",
         errorMessages: ["last name cannot be null"],
         hasError: true
       }
@@ -199,39 +195,32 @@ const noUserResult: ValidationResult = {
     address: {
       street: {
         name: {
-          errorMessage: "",
           errorMessages: [],
           hasError: false
         },
         number: {
-          errorMessage: "",
           errorMessages: [],
           hasError: false
         }
       },
       city: {
-        errorMessage: "city cannot be null",
         errorMessages: ["city cannot be null"],
         hasError: true
       },
       zipCode: {
-        errorMessage: "",
         errorMessages: [],
         hasError: false
       },
       apartmentNumber: {
-        errorMessage: "",
         errorMessages: [],
         hasError: false
       }
     },
     phone: {
-      errorMessage: "",
       errorMessages: [],
       hasError: false
     },
     email: {
-      errorMessage: "",
       errorMessages: [],
       hasError: false
     }
@@ -241,24 +230,20 @@ const noUserResult: ValidationResult = {
 
 const invalidUserResult: ValidationResult = {
   id: {
-    errorMessage: "id must be a positive integer",
     errorMessages: ["id must be a positive integer"],
     hasError: true
   },
   username: {
-    errorMessage: "username has been taken",
     errorMessages: ["username has been taken"],
     hasError: true
   },
   personalData: {
     name: {
       first: {
-        errorMessage: "",
         errorMessages: [],
         hasError: false
       },
       last: {
-        errorMessage: "last name cannot be blank",
         errorMessages: ["last name cannot be blank"],
         hasError: true
       }
@@ -266,35 +251,28 @@ const invalidUserResult: ValidationResult = {
     address: {
       street: {
         name: {
-          errorMessage: "",
           errorMessages: [],
           hasError: false
         },
         number: {
-          errorMessage: "street number must be a number",
           errorMessages: ["street number must be a number"],
           hasError: true
         }
       },
       city: {
-        errorMessage: "city cannot be null",
         errorMessages: ["city cannot be null"],
         hasError: true
       },
       zipCode: {
-        errorMessage: "",
         errorMessages: [],
         hasError: false
       },
       apartmentNumber: {
-        errorMessage: "",
         errorMessages: [],
         hasError: false
       }
     },
     phone: {
-      errorMessage: "phone number must contain only digits. " +
-      "phone number must have nine digits",
       errorMessages: [
         "phone number must contain only digits",
         "phone number must have nine digits"
@@ -302,7 +280,6 @@ const invalidUserResult: ValidationResult = {
       hasError: true
     },
     email: {
-      errorMessage: "invalid email",
       errorMessages: ["invalid email"],
       hasError: true
     }
@@ -310,46 +287,38 @@ const invalidUserResult: ValidationResult = {
   friends: [
     {
       id: {
-        errorMessage: "",
         errorMessages: [],
         hasError: false
       },
       username: {
-        errorMessage: "username must be at least three chars long",
         errorMessages: [
           "username must be at least three chars long"
         ],
         hasError: true
       },
       displayName: {
-        errorMessage: "",
         errorMessages: [],
         hasError: false
       },
       friends: {
-        errorMessage: "",
         errorMessages: [],
         hasError: false
       }
     },
     {
       id: {
-        errorMessage: "id cannot be null",
         errorMessages: ["id cannot be null"],
         hasError: true
       },
       username: {
-        errorMessage: "",
         errorMessages: [],
         hasError: false
       },
       displayName: {
-        errorMessage: "",
         errorMessages: [],
         hasError: false
       },
       friends: {
-        errorMessage: "friends list cannot contain blanks",
         errorMessages: [
           "friends list cannot contain blanks"
         ],
@@ -399,7 +368,7 @@ describe("Validate", function() {
             ).to.be.rejectedWith(
               ValidatorError,
               "Error validating property with value: u@example.com."
-              );
+            );
           });
         });
 
@@ -416,7 +385,7 @@ describe("Validate", function() {
             ).to.be.rejectedWith(
               ValidatorError,
               "Error validating property with value: u@example.com."
-              );
+            );
           });
         });
       });

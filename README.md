@@ -65,14 +65,12 @@ const validations: Validations = {
 validate(invalidUser, validations)
   .catch(ValidationError, err => console.log(err.errors));
 
-// { username: { errorMessage: '', errorMessages: [], hasError: false },
+// { username: { errorMessages: [], hasError: false },
 //   email:
-//    { errorMessage: 'email has been taken',
-//      errorMessages: [ 'email has been taken' ],
+//    { errorMessages: [ 'email has been taken' ],
 //      hasError: true },
 //   phone:
-//    { errorMessage: 'phone must have nine digits. phone must contain only digits',
-//      errorMessages:
+//    { errorMessages:
 //       [ 'phone must have nine digits',
 //         'phone must contain only digits' ],
 //      hasError: true } }
