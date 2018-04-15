@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/rodic/easy-validation.svg?branch=master)](https://travis-ci.org/rodic/easy-validation) [![Known Vulnerabilities](https://snyk.io/test/github/rodic/easy-validation/badge.svg?targetFile=package.json)](https://snyk.io/test/github/rodic/easy-validation?targetFile=package.json) [![codecov](https://codecov.io/gh/rodic/easy-validation/branch/master/graph/badge.svg)](https://codecov.io/gh/rodic/easy-validation)
 
-A TypeScript validation library. The lib use a subset of [validator.js](https://github.com/chriso/validator.js) validators, but it can use any function that validates string or string array and returns boolean or boolean promise.
+A TypeScript validation library. The lib use a subset of [validator.js](https://github.com/chriso/validator.js) validators, but it can use any function that validates string and returns boolean or boolean promise.
 
 ## Installation
 
@@ -90,22 +90,6 @@ The extended example that includes nested properties and array of objects can be
 
 All validators except `isNotNull` treat properties as optional. That is they validate `null` and `undefined`.
 
-### areEmails
-
-```ts
-areEmails()
-```
-
-Fails if list contains anything but valid emails.
-
-### areNumerics
-
-```ts
-areNumerics()
-```
-
-Fails if list contains anything but numeric values.
-
 ### contains
 
 ```ts
@@ -138,31 +122,6 @@ Fails if property does not have length between min and max.
 Valid options are `{ min: m }` and `{ max: m }` as well.
 
 If both values are omitted string is considered valid.
-
-### hasLengthsOf
-
-```ts
-interface LengthOption {
-  min?: number;
-  max?: number;
-}
-
-hasLengthsOf(option)
-```
-
-Fails if any value in the list does not match length criteria.
-
-Valid options are `{ min: m }` and `{ max: m }` as well.
-
-If both values are omitted all strings in the list are considered valid.
-
-### hasNotBlanks
-
-```ts
-hasNotBlanks()
-```
-
-Fails if list contains empty string.
 
 ### isAfterDate
 

@@ -58,32 +58,4 @@ describe("Validators.Numeric", function() {
       });
     });
   });
-
-  describe("areNumerics", function() {
-    context("when value is missing", function() {
-      it("returns true", function() {
-        expect(
-          N.areNumerics()(undefined)
-        ).to.be.eql(true);
-      });
-    });
-
-    context("when value is present", function() {
-      context("and there are strings that are not numeric", function() {
-        it("returns false", function() {
-          expect(
-            N.areNumerics()(["01", "a1"])
-          ).to.be.eql(false);
-        });
-      });
-
-      context("and all strings are numeric", function() {
-        it("returns true", function() {
-          expect(
-            N.areNumerics()(["01", "02"])
-          ).to.be.eql(true);
-        });
-      });
-    });
-  });
 });

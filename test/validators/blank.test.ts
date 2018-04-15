@@ -30,32 +30,4 @@ describe("Validators.Blank", function() {
       });
     });
   });
-
-  describe("hasNotBlanks", function() {
-    context("when value is missing", function() {
-      it("returns true", function() {
-        expect(
-          B.hasNotBlanks()(undefined)
-        ).to.be.eql(true);
-      });
-    });
-
-    context("when value is present", function() {
-      context("and it has blanks", function() {
-        it("returns false", function() {
-          expect(
-            B.hasNotBlanks()(["a", "", "b"])
-          ).to.be.eql(false);
-        });
-      });
-
-      context("and does not have blanks", function() {
-        it("returns true", function() {
-          expect(
-            B.hasNotBlanks()(["a", "b", "c"])
-          ).to.be.eql(true);
-        });
-      });
-    });
-  });
 });

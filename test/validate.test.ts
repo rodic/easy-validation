@@ -4,7 +4,7 @@ import { expect } from "./helpers";
 
 import * as V from "../src/validators";
 import validate, { Validations, ValidationObject } from "../src/validate";
-import { ValidationError, ValidatorError } from "../src/errors";
+import { ValidationError } from "../src/errors";
 import { ValidationResult } from "../src/validation-result";
 
 const validUser: ValidationObject = {
@@ -31,12 +31,10 @@ const validUser: ValidationObject = {
     id: "2",
     username: "fmess",
     displayName: "Frank Mess",
-    friends: ["hmess", "cmess"]
   }, {
     id: "3",
     username: "jmess",
     displayName: "Jane Mess",
-    friends: ["hmess"]
   }]
 };
 
@@ -64,12 +62,10 @@ const invalidUser: ValidationObject = {
     id: "2",
     username: "fm", // must have at least three chars
     displayName: "Frank Mess",
-    friends: ["hmess", "jdoe"]
   }, {
     // id: 3,  cannot be null or undefined
     username: "jmess",
     displayName: "Jane Mess",
-    friends: ["hmess", ""] // cannot contain blanks
   }]
 };
 
@@ -164,10 +160,6 @@ const userValidations: Validations = {
     displayName: [{
       validate: V.isNotBlank(),
       message: "display name cannot be blank"
-    }],
-    friends: [{
-      validate: V.hasNotBlanks(),
-      message: "friends list cannot contain blanks"
     }]
   }]]
 };
@@ -299,10 +291,6 @@ const invalidUserResult: ValidationResult = {
       displayName: {
         errorMessages: [],
         hasError: false
-      },
-      friends: {
-        errorMessages: [],
-        hasError: false
       }
     },
     {
@@ -317,12 +305,6 @@ const invalidUserResult: ValidationResult = {
       displayName: {
         errorMessages: [],
         hasError: false
-      },
-      friends: {
-        errorMessages: [
-          "friends list cannot contain blanks"
-        ],
-        hasError: true
       }
     }
   ]
@@ -350,66 +332,23 @@ describe("Validate", function() {
     });
 
     context("and there is validation object", function() {
-      context("and validations do not follow property types", function() {
-        const validationObject: ValidationObject = {
-          email: "u@example.com"
-        };
-
-        context("and validation is sync", function() {
-          it("returns correct error", function() {
-            const validations: Validations = {
-              email: [{
-                validate: V.areEmails(),
-                message: "not email"
-              }]
-            };
-            return expect(
-              validate(validationObject, validations)
-            ).to.be.rejectedWith(
-              ValidatorError,
-              "Error validating property with value: u@example.com."
-            );
-          });
-        });
-
-        context("and validation is async", function() {
-          it("returns correct error", function() {
-            const validations: Validations = {
-              email: [{
-                validate: vals => Promise.resolve(V.areEmails()(vals)),
-                message: "not email"
-              }]
-            };
-            return expect(
-              validate(validationObject, validations)
-            ).to.be.rejectedWith(
-              ValidatorError,
-              "Error validating property with value: u@example.com."
-            );
-          });
+      context("and is valid", function() {
+        it("returns the input", function() {
+          return expect(
+            validate(validUser, userValidations)
+          ).to.become(validUser);
         });
       });
 
-      context("and validations follow property types", function() {
-        context("and the input object satisfies them", function() {
-          it("returns the input", function() {
-            return expect(
-              validate(validUser, userValidations)
-            ).to.become(validUser);
+      context("and is not valid", function() {
+        it("returns correct errors", function() {
+          return expect(
+            validate(invalidUser, userValidations)
+          ).to.be.rejectedWith(ValidationError).then(error => {
+            return expect(error)
+              .to.have.property("errors").be.eql(invalidUserResult);
           });
         });
-
-        context("and the input object does not satisfy them", function() {
-          it("returns correct errors", function() {
-            return expect(
-              validate(invalidUser, userValidations)
-            ).to.be.rejectedWith(ValidationError).then(error => {
-              return expect(error)
-                .to.have.property("errors").be.eql(invalidUserResult);
-            });
-          });
-        });
-
       });
     });
   });

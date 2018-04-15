@@ -134,8 +134,9 @@ function validateValue(
           }
           return [...errors, validation.message];
         })
-        .catch(_error => {
-          const message = `Error validating property with value: ${value}.`;
+        .catch(err => {
+          const message =
+            `Error validating property with value: ${value} (${err.message}).`;
           return Promise.reject(new ValidatorError(message));
         });
     },

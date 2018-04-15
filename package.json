@@ -1,7 +1,7 @@
 {
   "name": "easy-validation",
   "description": "TypeScript validation library",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "homepage": "https://github.com/rodic/easy-validation",
   "keywords": [
     "validator",
@@ -32,7 +32,7 @@
     "@types/bluebird": "^3.5.19",
     "@types/validator": "^6.3.0",
     "bluebird": "^3.5.1",
-    "typescript": "^2.6.2",
+    "typescript": "^2.8.0",
     "validator": "^9.2.0"
   },
   "devDependencies": {

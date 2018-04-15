@@ -18,28 +18,19 @@ export type PBool = boolean | Promise<boolean>;
 
 export interface Validator {
   (value: string): PBool;
-  (value: string[]): PBool;
 }
 
 export interface UnlessNull {
   (value: string, fn: Validator): PBool;
-  (value: string[], fn: Validator): PBool;
 }
 
-export const isNull = val => val === null || val === undefined;
+export function isNull(val: string): boolean {
+  return val === null || val === undefined;
+}
 
-export const unlessNull: UnlessNull = (val, fn) => {
-  if (isNull(val)) {
-    return true;
-  }
-  return fn(val);
+export function unlessNull(val: string, fn: Validator): PBool {
+  return isNull(val) || fn(val);
 };
-
-export const areEmails: ValidatorWithOption<undefined>
-  = emailValidator.areEmails;
-
-export const areNumerics: ValidatorWithOption<undefined>
-  = numericValidator.areNumerics;
 
 export const contains: ValidatorWithOption<containsValidator.ContainsOption>
   = containsValidator.contains;
@@ -49,12 +40,6 @@ export const equals: ValidatorWithOption<equalsValidator.EqualsOption>
 
 export const hasLengthOf: ValidatorWithOption<lengthValidator.LengthOption>
   = lengthValidator.hasLengthOf;
-
-export const hasLengthsOf: ValidatorWithOption<lengthValidator.LengthOption>
-  = lengthValidator.hasLengthsOf;
-
-export const hasNotBlanks: ValidatorWithOption<undefined>
-  = blankValidator.hasNotBlanks;
 
 export const isAfterDate: ValidatorWithOption<dateValidator.DateOption>
   = dateValidator.isAfterDate;
